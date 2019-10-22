@@ -1,27 +1,27 @@
-FROM node:10 as installer
+# Pull
+FROM node:latest as builder
 
-WORKDIR /usr/src/
+RUN mkdir -p /frontend/internals
+WORKDIR /frontend
 
-COPY ./app ./app
-COPY ./internals ./internals
-COPY ./server ./server
 COPY .eslintrc.js .
 COPY .nvmrc .
 COPY *.config.js ./
 COPY *.json ./
 
+ADD ./internals/mocks ./internals/mocks
+ADD ./internals/scripts ./internals/scripts
+ADD ./internals/testing ./internals/testing
+ADD ./internals/webpack ./internals/webpack
+RUN ls -all ./internals
+
+ADD ./app ./app
+ADD ./server ./server
 RUN npm install
-
-FROM node:10 as builder
-WORKDIR /usr/src/
-COPY --from=installer /usr/src/node_modules/ ./node_modules
-
-COPY ./app ./app
-COPY ./internals ./internals
-COPY ./server ./server
-COPY .eslintrc.js .
-COPY .nvmrc .
-COPY *.config.js ./
-COPY *.json ./
-
 RUN npm run build
+
+
+# Pull from nginx container
+FROM nginx:alpine
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /frontend/build /usr/share/nginx/html
