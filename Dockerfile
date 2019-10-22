@@ -4,7 +4,6 @@ WORKDIR /usr/src/
 
 COPY ./app ./app
 COPY ./internals ./internals
-COPY ./static ./static
 COPY ./server ./server
 COPY .eslintrc.js .
 COPY .nvmrc .
@@ -20,7 +19,6 @@ COPY --from=installer /usr/src/node_modules/ ./node_modules
 
 COPY ./app ./app
 COPY ./internals ./internals
-COPY ./static ./static
 COPY ./server ./server
 COPY .eslintrc.js .
 COPY .nvmrc .
