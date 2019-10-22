@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    stages {
+        stage('Initialize') {
+            steps {
+                echo 'Started...'
+                echo "${BUILD_NUMBER} - ${BUILD_ID} on ${JENKINS_URL}"
+            }
+        }
+        stage('Checkout') {
+            steps {
+                echo 'Checking out...'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}
