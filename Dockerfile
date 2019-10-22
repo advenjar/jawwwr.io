@@ -9,7 +9,6 @@ COPY .eslintrc.js .
 COPY .nvmrc .
 COPY *.config.js ./
 COPY *.json ./
-COPY *.yaml ./
 
 RUN npm install 2>&1
 
