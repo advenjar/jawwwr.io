@@ -16,7 +16,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building - ${BUILD_NUMBER} .."
-                sh 'docker build --no-cache --target installer -t $BUILD_NUMBER .'
+                sh 'docker build --no-cache --target builder -t $BUILD_NUMBER .'
             }
         }
 
