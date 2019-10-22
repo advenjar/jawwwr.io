@@ -24,7 +24,7 @@ export default function Home() {
             brb.
           </div>
         </div>
-        <p className="is-size-7 tag">production test</p>
+        <p className="is-size-7 tag">integration test</p>
       </div>
     </section>
   );
