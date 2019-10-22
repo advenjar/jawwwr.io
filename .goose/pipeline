@@ -23,7 +23,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'docker run --rm -t -v $REPORT --name $JOB_BASE_NAME $BUILD_NUMBER'
+                sh 'docker run --rm -t -v $REPORT --name $JOB_BASE_NAME -p 80:80 $BUILD_NUMBER'
             }
         }
     }
