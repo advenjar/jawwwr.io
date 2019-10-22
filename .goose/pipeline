@@ -16,14 +16,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building - ${IMAGE_NAME} ..'
-                docker build --no-cache --target installer -t $IMAGE_NAME .
+                sh 'docker build --no-cache --target installer -t $IMAGE_NAME .'
             }
         }
 
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                docker run --rm -t -v $REPORT --name $CONTAINER_NAME $IMAGE_NAME 
+                sh 'docker run --rm -t -v $REPORT --name $CONTAINER_NAME $IMAGE_NAME'
             }
         }
     }
