@@ -1,4 +1,4 @@
-FROM node:lts as installer
+FROM node:10 as installer
 
 WORKDIR /usr/src/
 
@@ -10,9 +10,9 @@ COPY .nvmrc .
 COPY *.config.js ./
 COPY *.json ./
 
-RUN npm install 2>&1
+RUN npm install
 
-FROM node:lts as builder
+FROM node:10 as builder
 WORKDIR /usr/src/
 COPY --from=installer /usr/src/node_modules/ ./node_modules
 
