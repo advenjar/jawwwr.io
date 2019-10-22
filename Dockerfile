@@ -1,4 +1,4 @@
-FROM node:10 as installer
+FROM node:lts as installer
 
 WORKDIR /usr/src/
 
@@ -12,7 +12,7 @@ COPY *.json ./
 
 RUN npm install 2>&1
 
-FROM node:10 as builder
+FROM node:lts as builder
 WORKDIR /usr/src/
 COPY --from=installer /usr/src/node_modules/ ./node_modules
 
