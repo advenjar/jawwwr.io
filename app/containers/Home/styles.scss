@@ -1,0 +1,16 @@
+#Home {
+  position: relative;
+  .temp {
+    .title {
+      margin-bottom: -1rem;
+      margin-left: -.2rem;
+    }
+  }
+  .tag {
+    position: absolute;
+    color: rgba(255,255,255,.1);
+    left: 0;
+    bottom: 0;
+    margin: 1rem;
+  }
+}
