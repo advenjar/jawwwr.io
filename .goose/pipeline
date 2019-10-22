@@ -15,17 +15,17 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Building - ${IMAGE_NAME} ..'
+                docker build --no-cache --target installer -t $IMAGE_NAME . > ./docker.log
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
+
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                docker run --rm -t -v $REPORT \
+                --name $CONTAINER_NAME $IMAGE_NAME \
+                npm t -- --no-color --json --outputFile=/var/log/jest/test-errors.json --silent > ./test-results.log
             }
         }
     }
