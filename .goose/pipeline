@@ -23,9 +23,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                docker run --rm -t -v $REPORT \
-                --name $CONTAINER_NAME $IMAGE_NAME \
-                npm t -- --no-color --json --outputFile=/var/log/jest/test-errors.json --silent
+                docker run --rm -t -v $REPORT --name $CONTAINER_NAME $IMAGE_NAME 
             }
         }
     }
