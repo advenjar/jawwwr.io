@@ -5,7 +5,6 @@ pipeline {
             steps {
                 echo 'Started... {JOB_NAME} - {JOB_BASE_NAME} - {BUILD_TAG} - {GIT_BRANCH} - {GIT_BRANCH}'
                 echo "${JOB_BASE_NAME} - ${BUILD_NUMBER} - ${BUILD_ID} on ${JENKINS_URL}"
-                REPORT=$PWD'/log:/var/log/jest'
             }
         }
         stage('Checkout') {
@@ -24,7 +23,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'docker run -d --rm -t -v $REPORT --name jawwwr-integration -p 80:80 integration'
+                sh 'docker run -d --rm --name jawwwr-integration -p 80:80 integration'
             }
         }
     }
