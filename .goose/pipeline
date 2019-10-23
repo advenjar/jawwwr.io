@@ -15,15 +15,15 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo "Building - ${BUILD_NUMBER} .."
-                sh 'docker build --no-cache --target builder -t $BUILD_NUMBER .'
+                echo "Building - ${JOB_BASE_NAME} .."
+                sh 'docker build --no-cache --target builder -t $JOB_BASE_NAME .'
             }
         }
 
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'docker run --rm -t -v $REPORT --name $JOB_BASE_NAME -p 80:80 $BUILD_NUMBER'
+                sh 'docker run --rm -t -v $REPORT --name $JOB_BASE_NAME -p 80:80 $JOB_BASE_NAME'
             }
         }
     }
