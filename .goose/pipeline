@@ -23,7 +23,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'docker run -d --rm --name jawwwr-integration -p 80:80 integration'
+                sh 'docker run -d --name jawwwr-integration -p 80:80 integration'
             }
         }
     }
