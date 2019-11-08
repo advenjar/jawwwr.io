@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Initialize') {
             steps {
-                echo 'Started...'
-                echo "${JOB_NAME} - ${BUILD_NUMBER} - ${BUILD_ID} on ${JENKINS_URL}"
+                echo 'Started... {JOB_NAME} - {JOB_BASE_NAME} - {BUILD_TAG} - {GIT_BRANCH} - {GIT_BRANCH}'
+                echo "${JOB_BASE_NAME} - ${BUILD_NUMBER} - ${BUILD_ID} on ${JENKINS_URL}"
             }
         }
         stage('Checkout') {
@@ -15,17 +15,15 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo "Building - integration .."
+                sh 'docker build --no-cache --target builder -t integration .'
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
+
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh 'docker run -d --name jawwwr-integration -p 80:80 integration'
             }
         }
     }
